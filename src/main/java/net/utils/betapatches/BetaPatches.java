@@ -31,6 +31,7 @@ public class BetaPatches extends JavaPlugin {
         pm.registerEvent(Event.Type.PLAYER_INTERACT, new FreecamDupePatchPlayer(lastChestUse), Priority.Normal, this);
         pm.registerEvent(Event.Type.BLOCK_BREAK, new FreecamDupePatchBlock(lastChestUse), Priority.Normal, this);
         pm.registerEvent(Event.Type.BLOCK_BREAK, new AntiFastBreak(), Event.Priority.Normal, this);
+        pm.registerEvent(Event.Type.PLAYER_JOIN, new NegativeItemScan(), Priority.Normal, this);
 
         if (BOAT_ONLY_WATER) {
             pm.registerEvent(Event.Type.PLAYER_INTERACT, new ChunkCrashPatch(), Priority.Normal, this);
