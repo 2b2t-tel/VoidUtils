@@ -1,18 +1,21 @@
 # 🧩 BetaPatches
-**A plugin for Minecraft Beta 1.7.3 (Bukkit 1060)** that patches old exploits and dupes, preserving server stability on anarchy or retro servers.
+**A plugin for Minecraft Beta 1.7.3 (Bukkit 1060)** that patches known exploits, dupe glitches, lag machines, and illegal item usage.
 
 ---
 
 ## ✨ Features
 
-- ✅ **Freecam + Instamine Dupe Patch**  
-  Prevents players from interacting with chests from far away or instantly breaking them to duplicate items.
-
-- 🚫 **Chunk Crash Patch** (Boat Spam)  
-  Cancels boat placement to prevent chunk overloads that crash clients or corrupt regions.
-
-- 🔧 **Piston Dupe Patch**  
-  Blocks the placement of pistons entirely to stop known duplication exploits involving block updates.
+| Patch Name                | Description |
+|---------------------------|-------------|
+| `FreecamDupePatch`        | Blocks instamine + chest access duplication  
+| `ChunkCrashPatch`         | Prevents boat spam chunk crashes  
+| `PistonDupePatch`         | Patches piston + chest duplication glitch  
+| `NoBedrock`               | Blocks placement of bedrock  
+| `NoIllegals`              | Removes illegal blocks/items from inventories  
+| `NegativeItemScan`        | Scans containers for negative items and removes them  
+| `LoginMovementBlocker`    | Prevents movement before login (xAuth compatible)  
+| `KillCommand`             | Adds `/kill` command to suicide instantly  
+| `AntiFastBreak`           | Prevents mining too fast (nuker/speedmine clients)
 
 ---
 
@@ -26,11 +29,19 @@
 
 ## 🛠 File Structure
 
-- `BetaPatches.java` – Main plugin class  
-- `FreecamDupePatch.java` – Prevents chest dupe via freecam/instamine  
-- `ChunkCrashPatch.java` – Blocks boats to prevent chunk crashes  
-- `PistonDupePatch.java` – Prevents piston placement  
-- `plugin.yml` – Bukkit plugin definition file
+src/
+└─ net/utils/betapatches/
+├─ BetaPatches.java
+├─ FreecamDupePatchBlock.java
+├─ FreecamDupePatchPlayer.java
+├─ ChunkCrashPatch.java
+├─ PistonDupePatch.java
+├─ NoBedrock.java
+├─ NoIllegals.java
+├─ NegativeItemScan.java
+├─ LoginMovementBlocker.java
+├─ KillCommand.java
+├─ AntiFastBreak.java
 
 ---
 
