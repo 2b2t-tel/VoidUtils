@@ -1,0 +1,8 @@
+patches:
+  boat-placement-only-water: true
+  no-bedrock: true
+  no-illegals: true
+  piston-dupe: true
+  kill-command: true
+  negative-items: true
+  scan-negative-container-items: true
