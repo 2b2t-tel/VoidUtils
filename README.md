@@ -34,12 +34,6 @@
 
 ---
 
-## 📜 License
-
-This plugin is open source and licensed under the MIT License. Feel free to modify or use in your Beta server project.
-
----
-
 ## 👤 Author
 
 Created by Xera for retro/anarchy-style servers like `2b2t legacy`.
