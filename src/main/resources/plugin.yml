@@ -1,0 +1,3 @@
+name: BetaPatches
+version: '${project.version}'
+main: net.utils.betapatches.BetaPatches
