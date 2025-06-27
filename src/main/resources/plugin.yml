@@ -1,3 +1,7 @@
 name: BetaPatches
 version: '${project.version}'
 main: net.utils.betapatches.BetaPatches
+commands:
+  kill:
+    description: Instantly kill yourself
+    usage: /kill
