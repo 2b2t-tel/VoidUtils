@@ -27,24 +27,6 @@
 
 ---
 
-## 🛠 File Structure
-
-src/
-└─ net/utils/betapatches/
-├─ BetaPatches.java
-├─ FreecamDupePatchBlock.java
-├─ FreecamDupePatchPlayer.java
-├─ ChunkCrashPatch.java
-├─ PistonDupePatch.java
-├─ NoBedrock.java
-├─ NoIllegals.java
-├─ NegativeItemScan.java
-├─ LoginMovementBlocker.java
-├─ KillCommand.java
-├─ AntiFastBreak.java
-
----
-
 ## 👤 Author
 
 Created by Xera for retro/anarchy-style servers like `2b2t legacy`.
