@@ -17,8 +17,23 @@ public class NoIllegals {
 
         @Override
         public void onBlockPlace(BlockPlaceEvent event) {
-            if (illegalBlocks.contains(event.getBlockPlaced().getType())) {
-                event.setCancelled(true);
+            Material type = event.getBlockPlaced().getType();
+            Player player = event.getPlayer();
+
+            if (illegalBlocks.contains(type)) {
+                if (type == Material.FIRE) {
+                    // Allow placing fire only with Flint and Steel
+                    ItemStack hand = player.getItemInHand();
+                    if (hand != null && hand.getType() == Material.FLINT_AND_STEEL) {
+                        return; // allow
+                    } else {
+                        event.setCancelled(true); // block other fire placements
+                    }
+                } else if (type == Material.PORTAL) {
+                    event.setCancelled(true); // disallow placing portal blocks manually
+                } else {
+                    event.setCancelled(true); // disallow all other illegals
+                }
             }
         }
     }
@@ -40,15 +55,14 @@ public class NoIllegals {
     }
 
     private static final EnumSet<Material> illegalBlocks = EnumSet.of(
-            Material.PORTAL,
-            Material.FIRE,
+            Material.PORTAL,             // Only allow natural portal ignition
+            Material.FIRE,               // Allow natural fire (e.g., fireplace), block manual placement
             Material.BEDROCK,
             Material.LAVA,
             Material.STATIONARY_LAVA,
             Material.WATER,
             Material.STATIONARY_WATER,
             Material.MOB_SPAWNER,
-            Material.DISPENSER,
             Material.PISTON_BASE,
             Material.PISTON_STICKY_BASE
     );
