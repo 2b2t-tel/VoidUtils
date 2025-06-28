@@ -30,9 +30,10 @@ public class NoIllegals {
                         event.setCancelled(true); // block other fire placements
                     }
                 } else if (type == Material.PORTAL) {
-                    event.setCancelled(true); // disallow placing portal blocks manually
-                } else {
-                    event.setCancelled(true); // disallow all other illegals
+                    // Prevent manually placing portal blocks (portal glitch fix)
+                    event.setCancelled(true);
+                } else if (illegalBlocks.contains(type)) {
+                    event.setCancelled(true);
                 }
             }
         }
@@ -55,7 +56,6 @@ public class NoIllegals {
     }
 
     private static final EnumSet<Material> illegalBlocks = EnumSet.of(
-            Material.PORTAL,             // Only allow natural portal ignition
             Material.FIRE,               // Allow natural fire (e.g., fireplace), block manual placement
             Material.BEDROCK,
             Material.LAVA,
