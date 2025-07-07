@@ -1,4 +1,4 @@
-# 🧩 BetaPatches
+# 🧩 VoidUtils
 **A plugin for Minecraft Beta 1.7.3 (Bukkit 1060)** that patches known exploits, dupe glitches, lag machines, and illegal item usage.
 
 ---
