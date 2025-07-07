@@ -1,6 +1,6 @@
-name: BetaPatches
+name: VoidUtils
 version: '${project.version}'
-main: net.utils.betapatches.BetaPatches
+main: net.utils.voidutils.VoidUtils
 commands:
   kill:
     description: Instantly kill yourself
