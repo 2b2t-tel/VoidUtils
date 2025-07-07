@@ -5,4 +5,11 @@ patches:
   piston-dupe: true
   kill-command: true
   negative-items: true
-  scan-negative-container-items: true
+  anti-void-fall: true
+scan-negative-container-items: true
+
+website:
+  enabled: true
+  port: 8080
+  title: "2b2t"
+  message: ""

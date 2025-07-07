@@ -5,3 +5,5 @@ commands:
   kill:
     description: Instantly kill yourself
     usage: /kill
+  uptime:
+    description: Shows how long the server has been running

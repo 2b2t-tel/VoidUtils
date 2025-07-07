@@ -5,13 +5,13 @@ import org.bukkit.event.Event.Priority;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.config.Configuration;
-import org.bukkit.plugin.Plugin;
-import com.cypherx.xauth.xAuth;
 
 import java.io.File;
 import java.util.HashMap;
 
 public class VoidUtils extends JavaPlugin {
+    public static VoidUtils instance;
+    public static long serverStartTime;
 
     public static boolean BOAT_ONLY_WATER = true;
     public static boolean PATCH_NO_BEDROCK = true;
@@ -22,27 +22,33 @@ public class VoidUtils extends JavaPlugin {
     public static boolean PATCH_SCAN_NEGATIVE_CONTAINERS = true;
     public static boolean PATCH_ANTI_VOID_FALL = true;
 
+    public static boolean WEBSITE_ENABLED = true;
+    public static int WEBSITE_PORT = 8080;
+    public static String WEBSITE_TITLE = "2b2t";
+    public static String WEBSITE_MESSAGE = "";
+
     private Configuration config;
 
     @Override
     public void onEnable() {
+        instance = this; // ← Add this line
         loadConfiguration();
 
         PluginManager pm = getServer().getPluginManager();
         HashMap<String, Long> lastChestUse = new HashMap<String, Long>();
 
-        Plugin xAuthPlugin = pm.getPlugin("xAuth");
-        xAuth xauth = (xAuthPlugin instanceof xAuth) ? (xAuth) xAuthPlugin : null;
+        serverStartTime = System.currentTimeMillis();
+        getCommand("uptime").setExecutor(new UptimeCommand());
 
-        AntiCoordLogger listener = new AntiCoordLogger(xauth);
-        pm.registerEvent(Event.Type.PLAYER_QUIT, listener, Event.Priority.Lowest, this);
-        pm.registerEvent(Event.Type.PLAYER_KICK, listener, Event.Priority.Lowest, this);
-        pm.registerEvent(Event.Type.PLAYER_JOIN, listener, Event.Priority.Monitor, this);
 
         pm.registerEvent(Event.Type.PLAYER_INTERACT, new FreecamDupePatchPlayer(lastChestUse), Priority.Normal, this);
         pm.registerEvent(Event.Type.BLOCK_BREAK, new FreecamDupePatchBlock(lastChestUse), Priority.Normal, this);
         pm.registerEvent(Event.Type.BLOCK_BREAK, new AntiFastBreak(), Event.Priority.Normal, this);
         pm.registerEvent(Event.Type.PLAYER_JOIN, new NegativeItemScan(), Priority.Normal, this);
+
+        if (WEBSITE_ENABLED) {
+            Website.startServer(WEBSITE_PORT);
+        }
 
         if (BOAT_ONLY_WATER) {
             pm.registerEvent(Event.Type.PLAYER_INTERACT, new ChunkCrashPatch(), Priority.Normal, this);
@@ -86,6 +92,8 @@ public class VoidUtils extends JavaPlugin {
                 (ENABLE_KILL_COMMAND ? "KillCommand " : "") +
                 (PATCH_NEGATIVE_ITEMS ? "NegativeItems" : "")
         );
+
+
     }
 
     private void loadConfiguration() {
@@ -102,6 +110,13 @@ public class VoidUtils extends JavaPlugin {
             config.setProperty("patches.negative-items", true);
             config.setProperty("scan-negative-container-items", true);
             config.setProperty("patches.anti-void-fall", true);
+
+            // Website settings
+            config.setProperty("website.enabled", true);
+            config.setProperty("website.port", 8080);
+            config.setProperty("website.title", "2b2t");
+            config.setProperty("website.message", "");
+
             config.save();
         }
 
@@ -113,6 +128,11 @@ public class VoidUtils extends JavaPlugin {
         PATCH_NEGATIVE_ITEMS = config.getBoolean("patches.negative-items", true);
         PATCH_SCAN_NEGATIVE_CONTAINERS = config.getBoolean("patches.scan-negative-container-items", true);
         PATCH_ANTI_VOID_FALL = config.getBoolean("patches.anti-void-fall", true);
+
+        WEBSITE_ENABLED = config.getBoolean("website.enabled", true);
+        WEBSITE_PORT = config.getInt("website.port", 8080);
+        WEBSITE_TITLE = config.getString("website.title", "2b2t");
+        WEBSITE_MESSAGE = config.getString("website.message", "");
     }
 
     @Override
