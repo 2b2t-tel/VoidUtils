@@ -29,4 +29,4 @@
 
 ## 👤 Author
 
-Created by Xera for retro/anarchy-style servers like `2b2t legacy`.
+Created by 256msn for retro/anarchy-style servers like `2b2t legacy`.
